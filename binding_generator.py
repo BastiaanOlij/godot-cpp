@@ -1954,10 +1954,17 @@ def parse_default_value(type_name, value):
         construct_string = value[1:] if value[0:1] == "&" else value
         return f"StringName({construct_string})"
     elif type_name == "Array":
-        if value == "[  ]":
+        if value == "null":
+            return "Array()"
+        elif value == "[  ]":
+            return "Array()"
+        elif value == "[]":
+            return "Array()"
+        elif value == "Array()":
             return "Array()"
         else:
-            raise Exception(f"Array default value not implemented: type: {type_name}, value: {value}")
+            print(f"Array default value not implemented: type: {type_name}, value: {value}")
+            raise Exception("Array default value not implemented")
     elif type_name == "RID":
         return f"RID({value})"
     elif type_name == "Variant":
